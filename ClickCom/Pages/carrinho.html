@@ -47,62 +47,117 @@
                 </div>
               </nav>
     </header>
-    <title>Carrinho de Compras</title>
+    <title>Página do Carrinho</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Estilos CSS */
+        .cart {
+            display: flex;
         }
 
-        h1 {
+        .cart .column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .cart .column h2 {
             text-align: center;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        .cart .column ul {
+            list-style-type: none;
+            padding: 0;
         }
 
-        .cart-item {
-            padding: 10px;
-            border: 1px solid #ccc;
+        .cart .column ul li {
             margin-bottom: 10px;
         }
 
-        .cart-item h3 {
-            margin: 0;
-        }
-
-        .cart-item p {
-            margin-top: 5px;
-            color: #888;
-        }
-
-        .total-price {
-            margin-top: 10px;
+        .cart .column ul li span {
             font-weight: bold;
-            text-align: right;
         }
     </style>
 </head>
 <body>
-    <h1>Carrinho de Compras</h1>
+  <title>Página do Carrinho</title>
+  <style>
+      /* Estilos CSS */
+      .cart {
+          display: flex;
+      }
 
-    <div class="container">
-        <div class="cart-item">
-            <h3>Produto 1</h3>
-            <p>Descrição do Produto 1</p>
-            <p>Preço: R$ 50,00</p>
-        </div>
-        <div class="cart-item">
-            <h3>Produto 2</h3>
-            <p>Descrição do Produto 2</p>
-            <p>Preço: R$ 30,00</p>
-        </div>
+      .cart .column {
+          flex: 1;
+          padding: 10px;
+      }
 
-        <div class="total-price">
-            Total: R$ 80,00
-        </div>
-    </div>
+      .cart .column h2 {
+          text-align: center;
+      }
+
+      .cart .column ul {
+          list-style-type: none;
+          padding: 0;
+      }
+
+      .cart .column ul li {
+          margin-bottom: 10px;
+      }
+
+      .cart .column ul li span {
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+  <h1>Página do Carrinho</h1>
+
+  <div class="cart">
+      <div class="column">
+          <h2>Favoritos</h2>
+          <ul id="favorites-list"></ul>
+      </div>
+      <div class="column">
+          <h2>Carrinho</h2>
+          <ul id="cart-list"></ul>
+          <p id="cart-total"></p>
+      </div>
+  </div>
+
+  <script>
+      // Função para calcular o total do carrinho
+      function calculateTotal() {
+          let total = 0;
+
+          for (let i = 0; i < cart.length; i++) {
+              total += cart[i].price;
+          }
+
+          return total.toFixed(2);
+      }
+
+      // Função para renderizar o carrinho na página
+      function renderCart() {
+          const cartList = document.getElementById('cart-list');
+          cartList.innerHTML = '';
+          const totalElement = document.getElementById('cart-total');
+
+          for (let i = 0; i < cart.length; i++) {
+              const product = cart[i];
+              const li = document.createElement('li');
+              const span = document.createElement('span');
+              span.textContent = product.name + ' - R$ ' + product.price.toFixed(2);
+              li.appendChild(span);
+              cartList.appendChild(li);
+          }
+
+          totalElement.textContent = 'Total: R$ ' + calculateTotal();
+      }
+
+      // Recupera o carrinho do Local Storage ao carregar a página
+      window.onload = function() {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+          renderCart();
+      };
+  </script>
 </body>
 </html>
