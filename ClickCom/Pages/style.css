@@ -53,4 +53,17 @@
 
 .meio-contato li a:hover{
     color: #fff;
+
+    .container {
+        margin-top: 50px;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      .btn-block {
+        margin-top: 20px;
+      }
+      
 }
